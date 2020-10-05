@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-
-struct node {
-    int key;
-    struct node *next;
-};
+#include "linked_list.h"
 
 struct node* head = NULL;
 struct node* current = NULL;
@@ -31,13 +24,14 @@ bool isEmpty() {
 
 int length() {
     //O(n)
-    int len = 0;
+    if(head == NULL)
+        return 0;
     current=head;
+    int len = 1;
     while(current->next!=NULL) {
         current=current->next;
         len++;
     }
-    current=head;
     return len;
 }
 
@@ -50,12 +44,13 @@ struct node* find(int key) {
         if(current->key==key) {
             return current;
         }
+        current = current->next;
     }
-    printf("Node with key [%d] not found", key);
+    printf("Node with key [%d] not found\n", key);
     return NULL;
 }
 
-struct node* delete(int key) {
+struct node* deleteByKey(int key) {
     struct node* previous=head;
     if (head==NULL)
         return NULL;
@@ -67,19 +62,31 @@ struct node* delete(int key) {
         }
         previous = current;
     }
-    printf("Node with key [%d] not found", key);
+    printf("Node with key [%d] not found\n", key);
     return NULL;
 }
 
-void sort() {
+void clear() {
+    head = NULL;
+    current = NULL;
+}
 
+void swap (struct node* firstPrevious, struct node* secondPrevious) {
+    struct node* first = firstPrevious->next;
+    struct node* second = secondPrevious->next;
+    struct node* secondNext = second->next;
+
+    firstPrevious->next = second;
+    second->next = first->next;
+    first->next = secondNext;
+    secondPrevious->next = first;
+}
+
+void sort() {
 }
 
 void reverse() {
 
 }
 
-int main() {
-
-}
 
