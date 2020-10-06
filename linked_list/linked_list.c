@@ -40,7 +40,7 @@ struct node* find(int key) {
         return NULL;
 
     current=head;
-    while(current->next!=NULL) {
+    while(current!=NULL) {
         if(current->key==key) {
             return current;
         }
@@ -71,22 +71,28 @@ void clear() {
     current = NULL;
 }
 
-void swap (struct node* firstPrevious, struct node* secondPrevious) {
-    struct node* first = firstPrevious->next;
-    struct node* second = secondPrevious->next;
-    struct node* secondNext = second->next;
-
-    firstPrevious->next = second;
-    second->next = first->next;
-    first->next = secondNext;
-    secondPrevious->next = first;
+void swap (struct node* first, struct node* second) {
+    int tmp = first->key;
+    first->key = second->key;
+    second->key = tmp;
 }
 
 void sort() {
 }
 
 void reverse() {
-
+    if (head==NULL || head->next==NULL)
+       return;
+    struct node* prev = NULL;
+    struct node* next = NULL;
+    current = head;
+    while(current!=NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
 }
 
 

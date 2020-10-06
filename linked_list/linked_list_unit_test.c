@@ -124,6 +124,39 @@ void findTest() {
     printf("findTest is passed\n");
 }
 
+void swapTest() {
+    clear();
+    addFirst(10);
+    addFirst(12);
+    swap(find(10), find(12));
+    assert(head->key==10);
+    assert(head->next->key=12);
+    printf("swapTest is passed\n");
+}
+
+void reverseTest() {
+    clear();
+
+    reverse();
+    assert(head == NULL);
+
+    addFirst(1);
+    reverse();
+    assert(head->key == 1);
+
+    clear();
+    addFirst(1);
+    addFirst(2);
+    addFirst(3);
+    addFirst(4);
+    reverse();
+    assert(head->key == 1);
+    assert(head->next->key == 2);
+    assert(head->next->next->key == 3);
+    assert(head->next->next->next->key == 4);
+    printf("reverseTest is passed\n");
+}
+
 int main() {
     clearTest();
     lengthTest();
@@ -131,4 +164,6 @@ int main() {
     removeFirstTest();
     isEmptyTest();
     findTest();
+    swapTest();
+    reverseTest();
 }

@@ -18,6 +18,7 @@ struct node* find(int key);
 struct node* deleteByKey(int key);
 void swap(struct node* firstPrevious, struct node* secondPrevious);
 void clear(); 
+void reverse();
 
 extern struct node* head;
 extern struct node* current; 
